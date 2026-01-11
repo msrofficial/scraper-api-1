@@ -1,0 +1,32 @@
+name: Unzip and Save to Repo
+
+on:
+  workflow_dispatch: # Manually run korar jonno
+
+jobs:
+  unzip_and_push:
+    runs-on: ubuntu-latest
+    
+    # GitHub Action-er write permission dorkar commit korar jonno
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Unzip File
+        run: |
+          # ./ extracted folder-er bhetor unzip korbe
+          unzip Shirayuki-Scrapper-API-V1-main.zip -d extracted-files/
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add .
+          # Jodi kono notun file na thake tobe error jeno na dei tai '|| exit 0'
+          git commit -m "Unzipped Shirayuki-Scrapper-API-V1-main.zip" || exit 0
+          git push
+          

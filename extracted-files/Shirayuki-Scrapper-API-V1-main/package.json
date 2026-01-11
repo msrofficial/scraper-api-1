@@ -1,0 +1,48 @@
+{
+  "name": "shirayuki-anime-scraper-api",
+  "version": "1.0.0",
+  "description": "A comprehensive anime scraping API that provides anime information, streaming links, and search functionality from HiAnime and other popular anime streaming platforms",
+  "keywords": [
+    "anime",
+    "scraping",
+    "streaming",
+    "api",
+    "hianime",
+    "shirayuki",
+    "anime-api",
+    "scraper"
+  ],
+  "homepage": "https://github.com/Anandadevnath/Shirayuki-Scrapper-API#readme",
+  "bugs": {
+    "url": "https://github.com/Anandadevnath/Shirayuki-Scrapper-API/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anandadevnath/Shirayuki-Scrapper-API.git"
+  },
+  "license": "ISC",
+  "author": "Anandadevnath",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "npx nodemon index.js",
+    "test": "echo \"Warning: no test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@koozaki/romaji-conv": "^2.0.32",
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.1",
+    "puppeteer": "^24.20.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "wanakana": "^5.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

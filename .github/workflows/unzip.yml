@@ -1,13 +1,11 @@
-name: Unzip and Save to Repo
+name: Unzip Content to Root
 
 on:
-  workflow_dispatch: # Manually run korar jonno
+  workflow_dispatch:
 
 jobs:
-  unzip_and_push:
+  unzip_to_root:
     runs-on: ubuntu-latest
-    
-    # GitHub Action-er write permission dorkar commit korar jonno
     permissions:
       contents: write
 
@@ -15,10 +13,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Unzip File
+      - name: Extract and Move Files
         run: |
-          # ./ extracted folder-er bhetor unzip korbe
-          unzip Shirayuki-Scrapper-API-V1-main.zip -d extracted-files/
+          # 1. Zip file-ti unzip kora
+          unzip Shirayuki-Scrapper-API-V1-main.zip
+          
+          # 2. Folder-er bhetorer shob file root-e niye asha
+          # (Ekhane dhore neya hoyeche folder-er nam 'Shirayuki-Scrapper-API-V1-main')
+          mv Shirayuki-Scrapper-API-V1-main/* ./
+          mv Shirayuki-Scrapper-API-V1-main/.* ./ 2>/dev/null || true # Hidden files thakle segulo move korbe
+          
+          # 3. Khali folder ebong original zip delete kora
+          rm -rf Shirayuki-Scrapper-API-V1-main
+          rm Shirayuki-Scrapper-API-V1-main.zip
 
       - name: Commit and Push Changes
         run: |
@@ -26,7 +33,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           git add .
-          # Jodi kono notun file na thake tobe error jeno na dei tai '|| exit 0'
-          git commit -m "Unzipped Shirayuki-Scrapper-API-V1-main.zip" || exit 0
+          git commit -m "Moved all files from zip folder to root" || exit 0
           git push
-          
